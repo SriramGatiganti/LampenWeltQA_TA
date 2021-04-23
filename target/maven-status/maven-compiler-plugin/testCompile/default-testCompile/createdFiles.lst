@@ -1,0 +1,3 @@
+com\lampenwelt\qa\testcases\TC_01_02_RemoveCart.class
+com\lampenwelt\qa\testcases\TC_01_01_UpdateCart.class
+com\lampenwelt\qa\testcases\TC_01_03_AddCart.class

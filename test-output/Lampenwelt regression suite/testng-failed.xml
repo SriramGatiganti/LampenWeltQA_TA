@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="3" parallel="classes" name="Failed suite [Lampenwelt regression suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="3" parallel="classes" name="Lampenwelt regression test Cases(failed)">
+    <classes>
+      <class name="com.lampenwelt.qa.testcases.TC_01_01_UpdateCart">
+        <methods>
+          <include name="UpdateItemQty"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.lampenwelt.qa.testcases.TC_01_01_UpdateCart -->
+      <class name="com.lampenwelt.qa.testcases.TC_01_02_RemoveCart">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="RemoveItemFromCart"/>
+        </methods>
+      </class> <!-- com.lampenwelt.qa.testcases.TC_01_02_RemoveCart -->
+    </classes>
+  </test> <!-- Lampenwelt regression test Cases(failed) -->
+</suite> <!-- Failed suite [Lampenwelt regression suite] -->

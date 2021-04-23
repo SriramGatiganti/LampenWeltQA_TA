@@ -1,0 +1,4 @@
+com\lampenwelt\qa\pages\LandingPage.class
+com\lampenwelt\qa\pages\CartPage.class
+com\lampenwelt\qa\util\TestUtil.class
+com\lampenwelt\qa\base\TestBase.class
