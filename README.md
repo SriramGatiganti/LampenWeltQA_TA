@@ -12,16 +12,31 @@ log4j
 SuireFire
 ApachePOI
 
-### Steps to clone execute the tests
+###**Pre-requisite: **
+Java should be installed in the mechine and path shold be configured at system variables
+Maven should be installed and path should be configured at system variables
+
+## Options to execute the test scripts
+### Option1: Steps to clone execute the tests
 ```
 Open Command Promt
 Change the Directory to the folder where the framwork needs to be cloned
 then execute below steps:
 git clone https://github.com/SriramGatiganti/LampenWeltQA_TA.git
+git checkout master
 cd LampenWeltQA_TA
 mvn clean test
 ```
-### Steps to see the output result
+### Option2: Steps to execute from eclipse IDE
+```
+Open Command Promt
+Change the Directory to the folder where the framwork needs to be cloned
+then execute below steps:
+Open the eclipse
+Open the project folder "LampenWeltQA_TA" 
+Go to the pom.xml and then run as "MVN test"
+```
+## Steps to see the output result
 ```
 Go to the project directory "LampenWeltQA_TA"
 Go to the folder directory "test-output"
