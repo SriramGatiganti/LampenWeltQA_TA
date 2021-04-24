@@ -26,7 +26,6 @@ mvn clean test
 Go to the project directory "LampenWeltQA_TA"
 Go to the folder directory "test-output"
 Open  the html file "index.html"(Suirefire report) or "emailable-report.html"(testNG report)
-![image](https://user-images.githubusercontent.com/41125817/115968053-19869700-a536-11eb-8c28-2cfb2ba57f8d.png)
 
 ```
 
