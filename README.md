@@ -1,1 +1,0 @@
-# LampenWeltQA_TA
