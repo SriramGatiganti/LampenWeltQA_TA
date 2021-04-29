@@ -1,7 +1,6 @@
 package com.lampenwelt.qa.testcases;
 
 import java.util.concurrent.TimeUnit;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -35,27 +34,23 @@ public class TC_01_01_UpdateCart extends TestBase {
 	// *****************************************************************************************************************
 	//
 	// * Project :Lampenwelt QA
-	// * TestCase:Verification of price validation by updating the quantity in the cart
+	// * TestCase:Verification of price validation by updating the quantity in the
+	// cart
 	// * Author : Sriram Gatiganti
 	//
 	// *****************************************************************************************************************
 	/*
 	 * Test Steps : 1.Verify I am on the landing/home page of the shop portal
-	 * 2.Accept all cookies if present 
-	 * 3.Search for first article and add to cart
+	 * 2.Accept all cookies if present 3.Search for first article and add to cart
 	 * 4.Search for second article and add to cart 5.Search for third article and
-	 * add to cart 
-	 * 6.Verify the article count at cart label 
-	 * 7.Go to the cart page
-	 * 8.Verify the Item price expected before cart update
-	 * 9.Verify the Sub-total as expected before cart update
-	 * 10.Verify the Shipping cost as expected before quantity update
-	 * 11.Verify the Total cost as expected before cart update
-	 * 12.Update the quantity of my first product
-	 * 13.Verify the Item price as expected after cart update
-	 * 14.Verify the Sub-total as expected after cart update
-	 * 15.Verify the Shipping cost as expected after cart update
-	 * 16.Verify the Total cost as expected after the cart update
+	 * add to cart 6.Verify the article count at cart label 7.Go to the cart page
+	 * 8.Verify the Item price expected before cart update 9.Verify the Sub-total as
+	 * expected before cart update 10.Verify the Shipping cost as expected before
+	 * quantity update 11.Verify the Total cost as expected before cart update
+	 * 12.Update the quantity of my first product 13.Verify the Item price as
+	 * expected after cart update 14.Verify the Sub-total as expected after cart
+	 * update 15.Verify the Shipping cost as expected after cart update 16.Verify
+	 * the Total cost as expected after the cart update
 	 */
 	@Test(priority = 1, dataProvider = "getArticleTestData")
 	public void UpdateItemQty(String Pagetitle, String ArticleNumber1, String ArticleName1, String ArticleNumber2,
@@ -109,7 +104,7 @@ public class TC_01_01_UpdateCart extends TestBase {
 		// 8.Verify the Item price expected before cart update
 		String strItemPriceBfrUpdate = cartPage.getItemPrice();
 		System.out.println("Item price before upadte qty from cart---->" + strItemPriceBfrUpdate);
-		Assert.assertEquals(strItemPriceBfrUpdate,ItemPriceBeforeUpdate);
+		Assert.assertEquals(strItemPriceBfrUpdate, ItemPriceBeforeUpdate);
 
 		// 9.Verify the Subtotal as expected before cart update
 		String strNetAmtBfrUpdate = cartPage.getNetCost();

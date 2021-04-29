@@ -1,10 +1,10 @@
 package com.lampenwelt.qa.testcases;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.lampenwelt.qa.base.TestBase;
 import com.lampenwelt.qa.pages.CartPage;
 import com.lampenwelt.qa.pages.LandingPage;
@@ -32,26 +32,22 @@ public class TC_01_02_RemoveCart extends TestBase {
 	// *****************************************************************************************************************
 	//
 	// * Project : Lampenwelt QA
-	// * TestCase: Verification of price validation by removing the product from cart
+	// * TestCase: Verification of price validation by removing the product from
+	// cart
 	// * Author : Sriram Gatiganti
 	//
 	// *****************************************************************************************************************
 	/*
-	 * Test Steps : 
-	 * 1.Verify I am on the landing/home page of the shop portal
-	 * 2.Accept all cookies if present
-	 * 3.Search for first article and add to cart
-	 * 4.Search for second article and add to cart
-	 * 5.Search for third article and add to cart
-	 * 6.Verify the article count at cart label
-	 * 7.Go to the cart page
-	 * 8.Verify the Sub-total as expected before remove the item
-	 * 9.Verify the Shipping cost as expected before remove the item
-	 * 10.Verify the Total cost as expected before remove the item
-	 * 11.Remove the first item from the cart
-	 * 12.Verify the Sub-total as expected after removing the article
-	 * 13.Verify the Shipping cost as expected after cart update
-	 * 14.Verify the Total cost as expected after cart update
+	 * Test Steps : 1.Verify I am on the landing/home page of the shop portal
+	 * 2.Accept all cookies if present 3.Search for first article and add to cart
+	 * 4.Search for second article and add to cart 5.Search for third article and
+	 * add to cart 6.Verify the article count at cart label 7.Go to the cart page
+	 * 8.Verify the Sub-total as expected before remove the item 9.Verify the
+	 * Shipping cost as expected before remove the item 10.Verify the Total cost as
+	 * expected before remove the item 11.Remove the first item from the cart
+	 * 12.Verify the Sub-total as expected after removing the article 13.Verify the
+	 * Shipping cost as expected after cart update 14.Verify the Total cost as
+	 * expected after cart update
 	 */
 	@Test(priority = 1, dataProvider = "getArticleTestData")
 	public void RemoveItemFromCart(String Pagetitle, String ArticleNumber1, String ArticleName1, String ArticleNumber2,
@@ -64,7 +60,7 @@ public class TC_01_02_RemoveCart extends TestBase {
 		String homePageTitle = landingPage.getHomePageTitle();
 		Assert.assertEquals(homePageTitle, Pagetitle);
 
-		// 2.Accept all cookies if present	
+		// 2.Accept all cookies if present
 		boolean blnCookieVisisble = landingPage.cookieVisisble();
 		if (blnCookieVisisble == true) {
 			landingPage.acceptCookies();

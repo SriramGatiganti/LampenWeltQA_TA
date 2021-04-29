@@ -1,4 +1,5 @@
 package com.lampenwelt.qa.testcases;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -31,41 +32,36 @@ public class TC_01_03_AddCart extends TestBase {
 	// *****************************************************************************************************************
 	//
 	// * Project :Lampenwelt QA
-	// * TestCase:Verification of price validation by adding the new product in the cart
+	// * TestCase:Verification of price validation by adding the new product in the
+	// cart
 	// * Author : Sriram Gatiganti
 	//
 	// *****************************************************************************************************************
 	/*
-	 * Test Steps :
-	 * 1.Verify I am on the landing/home page of the shop portal
-	 * 2.Accept all cookies if present	
-	 * 3.Search for first article and add to cart
-	 * 4.Search for second article and add to cart
-	 * 5.Search for third article and add to cart
-	 * 6.Verify the article count at cart label
-	 * 7.Go to the cart page
-	 * 8.Verify the Sub-total as expected before cart update
-	 * 9.Verify the Shipping cost as expected before quantity update
-	 * 10.Verify the Total cost as expected before cart update
-	 * 11.Add new product to the cart
-	 * 12.Go to the cart page
-	 * 13.Verify the article count at cart label after adding new product
-	 * 14.Verify the Sub-total as expected after adding new product in the cart
-	 * 15.Verify the Shipping cost as expected after after adding new product in the
-	 * 16.Verify the Total cost as expected after after adding new product in the
+	 * Test Steps : 1.Verify I am on the landing/home page of the shop portal
+	 * 2.Accept all cookies if present 3.Search for first article and add to cart
+	 * 4.Search for second article and add to cart 5.Search for third article and
+	 * add to cart 6.Verify the article count at cart label 7.Go to the cart page
+	 * 8.Verify the Sub-total as expected before cart update 9.Verify the Shipping
+	 * cost as expected before quantity update 10.Verify the Total cost as expected
+	 * before cart update 11.Add new product to the cart 12.Go to the cart page
+	 * 13.Verify the article count at cart label after adding new product 14.Verify
+	 * the Sub-total as expected after adding new product in the cart 15.Verify the
+	 * Shipping cost as expected after after adding new product in the 16.Verify the
+	 * Total cost as expected after after adding new product in the
 	 */
 	@Test(priority = 1, dataProvider = "getArticleTestData")
 	public void AddNewItemToCard(String Pagetitle, String ArticleNumber1, String ArticleName1, String ArticleNumber2,
 			String ArticleName2, String ArticleNumber3, String ArticleName3, String ArticleNumber4, String ArticleName4,
 			String ArtcleCount, String UpdatedArtcleCount, String SubtotalBeforeAdd, String ShippingCostBeforeAdd,
-			String TotalAmountBeforeAdd,String SubtotalAfterAdd, String ShippingCostAfterAdd,
+			String TotalAmountBeforeAdd, String SubtotalAfterAdd, String ShippingCostAfterAdd,
 			String TotalAmountAfterAdd) throws InterruptedException {
 
 		// 1.Verify I am on the landing/home page of the shop portal
 		String homePageTitle = landingPage.getHomePageTitle();
 		Assert.assertEquals(homePageTitle, Pagetitle);
 
-		// 2.Accept all cookies if present	
+		// 2.Accept all cookies if present
 		boolean blnCookieVisisble = landingPage.cookieVisisble();
 		if (blnCookieVisisble == true) {
 			landingPage.acceptCookies();
@@ -124,11 +120,11 @@ public class TC_01_03_AddCart extends TestBase {
 
 		// 12.Go to the cart page
 		landingPage.clickOnCart();
-		
+
 		// 13.Verify the article count at cart label after adding new product
 		String strArtcleCount1 = landingPage.getCartArticleCount();
 		Assert.assertEquals(strArtcleCount1, UpdatedArtcleCount);
-			
+
 		// 14.Verify the Sub-total as expected after adding new product in the cart
 		String strNetAmtAftAdd = cartPage.getNetCost();
 		System.out.println("Subtotal amount after adding the new product in cart----->" + strNetAmtAftAdd);

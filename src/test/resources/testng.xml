@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Lampenwelt regression suite">
-	<test name="Lampenwelt regression test Cases">  
+<suite thread-count="2" name="Lampenwelt regression suite">
+
+	<test name="Lampenwelt regression test Cases WIN10-CHROME">
+		<parameter name="browser" value="Chrome" />
+		<parameter name="version" value="90.0" />
+		<parameter name="platform" value="Windows 10" />
 		<classes>
 			<class name="com.lampenwelt.qa.testcases.TC_01_01_UpdateCart"></class>
 			<class name="com.lampenwelt.qa.testcases.TC_01_02_RemoveCart"></class>

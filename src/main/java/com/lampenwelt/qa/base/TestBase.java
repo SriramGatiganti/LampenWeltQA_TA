@@ -38,6 +38,8 @@ public class TestBase {
 	public void StartBrowser() throws InterruptedException {
 		System.out.println("Driver Started");
 		String browserName = prop.getProperty("browser");
+		String USERNAME = prop.getProperty("username");
+		String ACCESS_KEY = prop.getProperty("access_key");
 
 		if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver.exe");
@@ -45,12 +47,18 @@ public class TestBase {
 		} else if (browserName.equals("FF")) {
 			System.setProperty("webdriver.gecko.driver", driverPath + "geckodriver.exe");
 			driver = new FirefoxDriver();
-		} else if (browserName.equals("remote")) {
-			DesiredCapabilities dc = DesiredCapabilities.firefox();
-			dc.setBrowserName("firefox");
-			/** URL is the selenium hub URL here **/
+
+		} else if (browserName.equals("cloud")) {
+			// Define Desired capabilities for Saucelab configuration
+			DesiredCapabilities dc = new DesiredCapabilities();
+			dc.setCapability("browserName", prop.getProperty("br"));
+			dc.setCapability("version", prop.getProperty("vr"));
+			dc.setCapability("platform", prop.getProperty("pf"));
+			/** Saucelab hub URL here **/
+			String hubURL = "https://" + USERNAME + ":" + ACCESS_KEY
+					+ "@ondemand.eu-central-1.saucelabs.com:443/wd/hub";
 			try {
-				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), dc);
+				driver = new RemoteWebDriver(new URL(hubURL), dc);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
