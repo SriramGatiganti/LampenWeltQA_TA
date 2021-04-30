@@ -1,5 +1,14 @@
 package com.lampenwelt.qa.testcases;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +24,8 @@ public class TC_01_02_RemoveCart extends TestBase {
 	CartPage cartPage;
 	TestUtil testUtil;
 	String sheetName = "remove_cart";
+	public static String TESTDATA_SHEET_PATH = System.getProperty("user.dir")
+			+ "/src/main/java/com/lampenwelt/qa/testdata/TestData.xlsx";
 
 	@BeforeMethod
 	public void setUp() throws InterruptedException {
@@ -54,7 +65,7 @@ public class TC_01_02_RemoveCart extends TestBase {
 			String ArticleName2, String ArticleNumber3, String ArticleName3, String ArtcleCount,
 			String SubtotalBeforeRemove, String ShippingCostBeforeRemove, String TotalAmountBeforeRemove,
 			String SubtotalAfterRemove, String ShippingCostAfterRemove, String TotalAmountAfterRemove)
-			throws InterruptedException {
+			throws InterruptedException, IOException {
 
 		// 1.Verify I am on the landing/home page of the shop portal
 		String homePageTitle = landingPage.getHomePageTitle();
@@ -129,6 +140,33 @@ public class TC_01_02_RemoveCart extends TestBase {
 		String strTotalAmtAftRmvItem = cartPage.getTotalCost();
 		System.out.println("Total amount after removing the item from cart------->" + strTotalAmtAftRmvItem);
 		Assert.assertEquals(strTotalAmtAftRmvItem, TotalAmountAfterRemove);
+		
+		//Create an object of File class to open xlsx file
+	    File file = new File(TESTDATA_SHEET_PATH);
+	    
+	    //Create an object of FileInputStream class to read excel file
+	    FileInputStream inputStream = new FileInputStream(file);
+	    
+	    //Creating workbook instance that refers to .xls file
+	    XSSFWorkbook wb=new XSSFWorkbook(inputStream);
+	    
+	    //Creating a Sheet object using the sheet Name
+	    XSSFSheet sheet=wb.getSheet("update_cart");
+	    
+	    //get all rows in the sheet
+	    int rowCount=sheet.getLastRowNum()-sheet.getFirstRowNum();
+	    
+	    //iterate over all the rows in Excel and put data in the form.
+	    for(int i=1;i<=rowCount;i++) {
+	         
+	        //create a new cell in the row at index 6
+	        XSSFCell cell = sheet.getRow(i).createCell(14);
+	        cell.setCellValue("PASS");
+	        // Write the data back in the Excel file
+	        FileOutputStream outputStream = new FileOutputStream("E:\\Interviews\\Interview Challanges\\LampenWelt\\Lampenwelt_QA_TA\\LampenWeltQA_TA\\src\\main\\java\\com\\lampenwelt\\qa\\testdata\\TestData.xlsx");
+	        wb.write(outputStream);
+	    	}
+	    
 	}
 
 	@AfterMethod
