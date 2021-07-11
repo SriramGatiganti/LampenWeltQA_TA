@@ -1,23 +1,19 @@
 package com.lampenwelt.qa.testcases;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.lampenwelt.qa.base.TestBase;
 import com.lampenwelt.qa.pages.CartPage;
 import com.lampenwelt.qa.pages.LandingPage;
 import com.lampenwelt.qa.util.TestUtil;
+import static com.lampenwelt.qa.extentreport.ExtentTestManager.reporterLog;
 
 public class TC_01_03_AddCart extends TestBase {
 	LandingPage landingPage;
@@ -28,14 +24,16 @@ public class TC_01_03_AddCart extends TestBase {
 			+ "/src/main/java/com/lampenwelt/qa/testdata/TestData.xlsx";
 
 	@BeforeMethod
-	public void setUp() throws InterruptedException {
-		StartBrowser();
+	@Parameters({"browser", "platform", "version"})
+	public void setUp(String browserName, String platformName, String versionName, Method name) throws InterruptedException, MalformedURLException {
+		StartBrowser(browserName,platformName,versionName,name);	
 		landingPage = new LandingPage();
 		cartPage = new CartPage();
+		testUtil = new TestUtil();
 	}
 
 	@DataProvider
-	public Object[][] getArticleTestData() {
+	public Object[][] getArticleTestData() throws Exception {
 		Object data[][] = TestUtil.getTestData(sheetName);
 		return data;
 	}
@@ -71,6 +69,7 @@ public class TC_01_03_AddCart extends TestBase {
 		// 1.Verify I am on the landing/home page of the shop portal
 		String homePageTitle = landingPage.getHomePageTitle();
 		Assert.assertEquals(homePageTitle, Pagetitle);
+		reporterLog("Verify the homepage totle"+homePageTitle);
 
 		// 2.Accept all cookies if present
 		boolean blnCookieVisisble = landingPage.cookieVisisble();
@@ -80,27 +79,32 @@ public class TC_01_03_AddCart extends TestBase {
 		} else if (blnCookieVisisble == false) {
 			System.out.println("Cookie bar not presented----->" + blnCookieVisisble);
 		}
-
+		reporterLog("Verify the cookies bar presented "+blnCookieVisisble);
+		
 		// 3.Search for first article and add to cart
 		landingPage.searchMyProduct(ArticleNumber1);
 		String strMyFirstArticle = landingPage.getArticleTitle();
 		Assert.assertEquals(strMyFirstArticle, ArticleName1);
 		landingPage.clickAddToCart();
-		Thread.sleep(1000);
+		reporterLog("Verify the first artical number");
+			
+		//Thread.sleep(1000);
 
 		// 4.Search for second article and add to cart
 		landingPage.searchMyProduct(ArticleNumber2);
 		String strMySecondArticle = landingPage.getArticleTitle();
 		Assert.assertEquals(strMySecondArticle, ArticleName2);
 		landingPage.clickAddToCart();
-		Thread.sleep(1000);
+		reporterLog("Verify the second artical number");
+		//Thread.sleep(1000);
 
 		// 5.Search for third article and add to cart
 		landingPage.searchMyProduct(ArticleNumber3);
 		String strMyThirdArticle = landingPage.getArticleTitle();
 		Assert.assertEquals(strMyThirdArticle, ArticleName3);
 		landingPage.clickAddToCart();
-		Thread.sleep(1000);
+		reporterLog("Verify the third artical number");
+		//Thread.sleep(1000);
 
 		// 6.Verify the article count at cart label
 		String strArtcleCount = landingPage.getCartArticleCount();
@@ -127,7 +131,7 @@ public class TC_01_03_AddCart extends TestBase {
 		// 11.Add new product to the cart
 		landingPage.searchMyProduct(ArticleNumber4);
 		landingPage.clickAddToCart();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		// 12.Go to the cart page
 		landingPage.clickOnCart();
@@ -149,34 +153,13 @@ public class TC_01_03_AddCart extends TestBase {
 		// 16.Verify the Total cost as expected after after adding new product in the
 		String strTotalAmtAftAdd = cartPage.getTotalCost();
 		System.out.println("Total amount adding the new product in cart------->" + strTotalAmtAftAdd);
-		Assert.assertEquals(strTotalAmtAftAdd, TotalAmountAfterAdd);
+		if ((strTotalAmtAftAdd).equals(TotalAmountAfterAdd)) {			
+			TestUtil.setData(sheetName, 17, "PASS");
+		} else {
+			TestUtil.setData(sheetName, 17, "FAIL");
+		}
+		Assert.assertEquals(strTotalAmtAftAdd,TotalAmountAfterAdd);
 		
-		//Create an object of File class to open xlsx file
-	    File file = new File(TESTDATA_SHEET_PATH);
-	    
-	    //Create an object of FileInputStream class to read excel file
-	    FileInputStream inputStream = new FileInputStream(file);
-	    
-	    //Creating workbook instance that refers to .xls file
-	    XSSFWorkbook wb=new XSSFWorkbook(inputStream);
-	    
-	    //Creating a Sheet object using the sheet Name
-	    XSSFSheet sheet=wb.getSheet("update_cart");
-	    
-	    //get all rows in the sheet
-	    int rowCount=sheet.getLastRowNum()-sheet.getFirstRowNum();
-	    
-	    //iterate over all the rows in Excel and put data in the form.
-	    for(int i=1;i<=rowCount;i++) {
-	         
-	        //create a new cell in the row at index 6
-	        XSSFCell cell = sheet.getRow(i).createCell(18);
-	        cell.setCellValue("PASS");
-	        // Write the data back in the Excel file
-	        FileOutputStream outputStream = new FileOutputStream("E:\\Interviews\\Interview Challanges\\LampenWelt\\Lampenwelt_QA_TA\\LampenWeltQA_TA\\src\\main\\java\\com\\lampenwelt\\qa\\testdata\\TestData.xlsx");
-	        wb.write(outputStream);
-	    	}
-
 	}
 
 	@AfterMethod

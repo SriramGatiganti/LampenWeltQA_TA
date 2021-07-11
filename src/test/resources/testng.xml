@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="2" name="Lampenwelt regression suite">
+<suite name="Lampenwelt regression suite">
 
-	<test name="Lampenwelt regression test Cases WIN10-CHROME">
-		<parameter name="browser" value="Chrome" />
-		<parameter name="version" value="90.0" />
-		<parameter name="platform" value="Windows 10" />
+	<listeners>
+		<listener
+			class-name="com.lampenwelt.qa.extentreport.TestNGListener" />
+	</listeners>
+
+	<!--<test name="Lampenwelt regression test Cases WIN10-FF"> <parameter name="browser" 
+		value="firefox" /> <parameter name="version" value="79.0" /> <parameter name="platform" 
+		value="windows 10" /> <classes> <class name="com.lampenwelt.qa.testcases.TC_01_01_UpdateCart"></class> 
+		<class name="com.lampenwelt.qa.testcases.TC_01_02_RemoveCart"></class> <class 
+		name="com.lampenwelt.qa.testcases.TC_01_03_AddCart"></class> <class name="com.lampenwelt.qa.testcases.TC_02_01_HandlingWindows"></class> 
+		</classes> </test> -->
+
+	<!--<test name="Lampenwelt regression test Cases WIN10-Chrome"> <parameter 
+		name="browser" value="chrome" /> <parameter name="version" value="85.0" /> 
+		<parameter name="platform" value="windows 10" /> <classes> <class name="com.lampenwelt.qa.testcases.TC_01_01_UpdateCart"></class> 
+		<class name="com.lampenwelt.qa.testcases.TC_01_02_RemoveCart"></class> <class 
+		name="com.lampenwelt.qa.testcases.TC_01_03_AddCart"></class> <class name="com.lampenwelt.qa.testcases.TC_02_01_HandlingWindows"></class> 
+		</classes> </test> -->
+
+	<test name="Lampenwelt regression test Cases macOS-Safari">
+		<parameter name="browser" value="safari" />
+		<parameter name="version" value="13.1" />
+		<parameter name="platform" value="macOS 10.15" />
 		<classes>
 			<class name="com.lampenwelt.qa.testcases.TC_01_01_UpdateCart"></class>
 			<class name="com.lampenwelt.qa.testcases.TC_01_02_RemoveCart"></class>
